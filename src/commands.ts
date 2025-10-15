@@ -1,11 +1,12 @@
 import type { Editor, Component } from 'grapesjs';
 import { PluginOptions } from '.';
 import { commandNameCustomCode, keyCustomCode } from './utils';
+import { MonacoCodeViewer, languageMap, themeMap } from './monaco-editor';
 
 type ContentTypes = HTMLElement | string | undefined;
 
 export default (editor: Editor, opts: PluginOptions = {}) => {
-  const { modalTitle, codeViewOptions, commandCustomCode } = opts;
+  const { modalTitle, codeViewOptions, monacoOptions, commandCustomCode } = opts;
 
   const appendToContent = (target: HTMLElement, content?: ContentTypes) => {
     if (content instanceof HTMLElement) {
@@ -19,7 +20,7 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
   editor.Commands.add(commandNameCustomCode, {
     keyCustomCode,
     target: null as null | Component,
-    codeViewer: null as any,
+    codeViewer: null as MonacoCodeViewer | null,
 
     run(editor, s, opts = {}) {
       const target = opts.target || editor.getSelected();
@@ -44,8 +45,12 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
       const content = this.getContent();
       editor.Modal
         .open({ title, content })
-        .onceClose(() => editor.stopCommand(commandNameCustomCode))
-      this.getCodeViewer().setContent(code);
+        .onceClose(() => editor.stopCommand(commandNameCustomCode));
+      
+      // Set content after modal is opened to ensure DOM is ready
+      setTimeout(() => {
+        this.getCodeViewer().setContent(code);
+      }, 0);
     },
 
     /**
@@ -71,8 +76,12 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
       content.appendChild(codeViewer.getElement());
       appendToContent(content, this.getPostContent() as ContentTypes);
       appendToContent(content, this.getContentActions());
-      codeViewer.refresh();
-      setTimeout(()=> codeViewer.focus(), 0);
+      
+      // Refresh and focus after DOM is ready
+      setTimeout(() => {
+        codeViewer.refresh();
+        codeViewer.focus();
+      }, 100);
 
       return content;
     },
@@ -97,23 +106,34 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
      */
     handleSave() {
       const { target } = this;
-      const code = this.getCodeViewer().getContent();
-      target?.set(keyCustomCode, code);
-      editor.Modal.close();
+      if (target) {
+        const code = this.getCodeViewer().getContent();
+        target.set(keyCustomCode, code);
+        editor.Modal.close();
+      }
     },
 
     /**
-     * Return the code viewer instance
-     * @return {CodeViewer}
+     * Return the Monaco code viewer instance
+     * @return {MonacoCodeViewer}
      */
-    getCodeViewer() {
+    getCodeViewer(): MonacoCodeViewer {
       if (!this.codeViewer) {
-        this.codeViewer = editor.CodeManager.createViewer({
-          codeName: 'htmlmixed',
-          theme: 'hopscotch',
-          readOnly: 0,
-          ...codeViewOptions,
-        });
+        // Map legacy codeViewOptions to Monaco options
+        const legacyOptions = codeViewOptions || {};
+        const language = languageMap[legacyOptions.codeName || 'htmlmixed'] || 'html';
+        const theme = themeMap[legacyOptions.theme || 'hopscotch'] || 'vs-dark';
+        const readOnly = legacyOptions.readOnly === 1 || legacyOptions.readOnly === true;
+
+        const monacoConfig = {
+          language,
+          theme,
+          readOnly,
+          ...monacoOptions,
+          ...legacyOptions
+        };
+
+        this.codeViewer = new MonacoCodeViewer(monacoConfig);
       }
       return this.codeViewer;
     },

@@ -37,11 +37,26 @@ export type PluginOptions = {
    modalTitle?: string;
 
    /**
-    * Additional options for the code viewer.
+    * Additional options for the Monaco code editor.
     * @example
-    * { theme: 'hopscotch', readOnly: 0 }
+    * { theme: 'vs-dark', readOnly: false, language: 'html' }
     */
    codeViewOptions?: Record<string, any>;
+
+   /**
+    * Monaco Editor specific options
+    */
+   monacoOptions?: {
+     theme?: string;
+     language?: string;
+     readOnly?: boolean;
+     minimap?: { enabled: boolean };
+     lineNumbers?: 'on' | 'off' | 'relative' | 'interval';
+     wordWrap?: 'on' | 'off' | 'wordWrapColumn' | 'bounded';
+     fontSize?: number;
+     tabSize?: number;
+     [key: string]: any;
+   };
 
    /**
     * Label for the default save button
@@ -68,6 +83,16 @@ const plugin: Plugin<PluginOptions> = (editor, opts = {}) => {
     </div>`,
     modalTitle: 'Insert your code',
     codeViewOptions: {},
+    monacoOptions: {
+      theme: 'vs-dark',
+      language: 'html',
+      readOnly: false,
+      minimap: { enabled: false },
+      lineNumbers: 'on',
+      wordWrap: 'on',
+      fontSize: 14,
+      tabSize: 2
+    },
     buttonLabel: 'Save',
     commandCustomCode: {},
     ...opts

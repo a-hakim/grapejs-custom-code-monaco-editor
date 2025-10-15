@@ -1,7 +1,7 @@
 {
   "name": "grapesjs-custom-code",
-  "version": "1.0.2",
-  "description": "GrapesJS component for the embed of custom code",
+  "version": "1.0.4",
+  "description": "GrapesJS component for the embed of custom code with Monaco Editor integration",
   "main": "dist/index.js",
   "files": [
     "dist/"
@@ -19,12 +19,19 @@
     "plugin",
     "import",
     "custom",
-    "code"
+    "code",
+    "monaco-editor",
+    "code-editor",
+    "syntax-highlighting",
+    "intellisense"
   ],
   "author": "Artur Arseniev",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "grapesjs": "^0.21.2",
     "grapesjs-cli": "^4.1.0"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.44.0"
   }
 }
