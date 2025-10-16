@@ -20,7 +20,7 @@ This enhanced version replaces the default CodeMirror editor with Monaco Editor,
 
 ## Summary
 
-* Plugin name: `grapesjs-custom-code`
+* Plugin name: `grapejs-custom-code-monaco-editor`
 * Components
   * `custom-code`
 * Blocks
@@ -71,9 +71,9 @@ For complete Monaco Editor options, see the [Monaco Editor API documentation](ht
 ## Download
 
 * CDN
-  * `https://unpkg.com/grapesjs-custom-code`
+  * `https://unpkg.com/grapejs-custom-code-monaco-editor`
 * NPM
-  * `npm i grapesjs-custom-code`
+  * `npm i grapejs-custom-code-monaco-editor`
 * GIT
   * `git clone https://github.com/GrapesJS/components-custom-code.git`
 
@@ -89,7 +89,7 @@ For complete Monaco Editor options, see the [Monaco Editor API documentation](ht
 <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
 <script src="https://unpkg.com/grapesjs"></script>
 <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
-<script src="path/to/grapesjs-custom-code.min.js"></script>
+<script src="path/to/grapejs-custom-code-monaco-editor.min.js"></script>
 
 <div id="gjs"></div>
 
@@ -101,9 +101,9 @@ For complete Monaco Editor options, see the [Monaco Editor API documentation](ht
     var editor = grapesjs.init({
         container : '#gjs',
         ...
-        plugins: ['grapesjs-custom-code'],
+        plugins: ['grapejs-custom-code-monaco-editor'],
         pluginsOpts: {
-          'grapesjs-custom-code': {
+          'grapejs-custom-code-monaco-editor': {
             modalTitle: 'Edit Code with Monaco Editor',
             monacoOptions: {
               theme: 'vs-dark',
@@ -126,7 +126,7 @@ For complete Monaco Editor options, see the [Monaco Editor API documentation](ht
 
 ```jsx
 import GrapesJS from 'grapejs';
-import customCodePlugin from 'grapesjs-custom-code';
+import customCodePlugin from 'grapejs-custom-code-monaco-editor';
 import * as monaco from 'monaco-editor';
 
 // Configure Monaco Editor (if using webpack/bundler)
@@ -184,7 +184,7 @@ Clone the repository
 
 ```sh
 $ git clone https://github.com/GrapesJS/components-custom-code.git
-$ cd grapesjs-custom-code
+$ cd grapejs-custom-code-monaco-editor
 ```
 
 Install dependencies
