@@ -1,12 +1,19 @@
 # GrapesJS Custom Code with Monaco Editor
 
-This plugin adds the possibility to embed custom code using the powerful Monaco Editor (the same editor that powers VS Code).
+This plugin adds the possibility to embed custom code using the powerful Monaco Editor (the same editor that powers VS Code) with **automatic initialization** - no separate setup required!
 
 <p align="center"><img src="https://user-images.githubusercontent.com/11614725/43289377-15322c5e-912b-11e8-9a29-cc2dc45af48a.gif" alt="GrapesJS Custom Code" align="center"/></p>
 
-## 🎉 New in this version: Monaco Editor Integration
+## 🚀 **FULLY INTEGRATED** - One Plugin, Zero Setup!
 
-This enhanced version replaces the default CodeMirror editor with Monaco Editor, providing:
+This plugin is now **completely self-contained**:
+
+- 🎯 **Zero External Dependencies** - Monaco Editor loads automatically from CDN
+- ⚡ **Instant Setup** - Just add the plugin to GrapesJS and you're ready to go
+- 🔧 **No Manual Configuration** - Monaco Editor initializes seamlessly
+- 📦 **Single Package** - Everything you need in one plugin
+
+## 🎉 Monaco Editor Integration Features
 
 - ✨ **Rich Syntax Highlighting** - Support for HTML, CSS, JavaScript, TypeScript, and many more languages
 - 🔍 **IntelliSense** - Intelligent code completion, parameter info, quick info, and member lists
@@ -16,6 +23,16 @@ This enhanced version replaces the default CodeMirror editor with Monaco Editor,
 - 📱 **Accessibility** - Better screen reader support and keyboard navigation
 
 > Requires GrapesJS v0.14.25 or higher
+
+## 📋 Quick Start
+
+```javascript
+// That's it! Monaco Editor loads automatically
+grapesjs.init({
+  container: '#gjs',
+  plugins: ['grapejs-custom-code-monaco-editor']
+});
+```
 
 
 ## Summary
@@ -42,6 +59,7 @@ This enhanced version replaces the default CodeMirror editor with Monaco Editor,
 | `modalTitle` | Title for the modal | `Insert your code` |
 | `codeViewOptions` | **Legacy:** Additional options for backward compatibility | `{}` |
 | `monacoOptions` | **New:** Monaco Editor specific options (see below) | `{ theme: 'vs-dark', language: 'html', ... }` |
+| `monacoLoaderOptions` | **New:** Monaco Editor loading configuration | `{ version: '0.54.0' }` |
 | `buttonLabel` | Label for the default save button | `Save` |
 | `commandCustomCode` | Object to extend the default custom code command, eg. `{ getPreContent: () => '<div>Paste here</div>' }` [Check the source](https://github.com/GrapesJS/components-custom-code/blob/master/src/commands.ts) to see all available methods | `{}` |
 
@@ -63,6 +81,25 @@ The `monacoOptions` object accepts all Monaco Editor configuration options:
 | `scrollBeyondLastLine` | Allow scrolling beyond last line | `false` |
 
 For complete Monaco Editor options, see the [Monaco Editor API documentation](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html).
+
+### Monaco Loader Options
+
+The `monacoLoaderOptions` object controls how Monaco Editor is loaded:
+
+|Option|Description|Default|
+|-|-|-
+| `version` | Monaco Editor version to load from CDN | `'0.54.0'` |
+| `baseUrl` | Custom CDN base URL for Monaco Editor | `https://unpkg.com/monaco-editor@{version}/min/vs` |
+
+Example:
+```javascript
+{
+  monacoLoaderOptions: {
+    version: '0.50.0',  // Use specific version
+    baseUrl: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.50.0/min/vs'  // Custom CDN
+  }
+}
+```
 
 
 

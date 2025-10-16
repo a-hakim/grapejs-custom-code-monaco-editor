@@ -39,7 +39,7 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
      * Method which tells how to show the custom code
      * @param  {Component} target
      */
-    showCustomCode(target: Component, options: any) {
+    async showCustomCode(target: Component, options: any) {
       const title = options.title || modalTitle;
       const code = target.get(keyCustomCode) || '';
       const content = this.getContent();
@@ -47,9 +47,10 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
         .open({ title, content })
         .onceClose(() => editor.stopCommand(commandNameCustomCode));
       
-      // Set content after modal is opened to ensure DOM is ready
-      setTimeout(() => {
-        this.getCodeViewer().setContent(code);
+      // Set content after modal is opened and Monaco is ready
+      setTimeout(async () => {
+        const codeViewer = this.getCodeViewer();
+        await codeViewer.setContent(code);
       }, 0);
     },
 
@@ -78,9 +79,9 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
       appendToContent(content, this.getContentActions());
       
       // Refresh and focus after DOM is ready
-      setTimeout(() => {
-        codeViewer.refresh();
-        codeViewer.focus();
+      setTimeout(async () => {
+        await codeViewer.refresh();
+        await codeViewer.focus();
       }, 100);
 
       return content;
@@ -104,7 +105,7 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
     /**
      * Handle the main save task
      */
-    handleSave() {
+    async handleSave() {
       const { target } = this;
       if (target) {
         const code = this.getCodeViewer().getContent();

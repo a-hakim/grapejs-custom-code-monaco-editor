@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Basic Usage - GrapesJS Custom Code Monaco Editor</title>
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/grapesjs"></script>
+    <script src="../dist/index.js"></script>
+    <style>
+        body, html { height: 100%; margin: 0; }
+    </style>
+</head>
+<body>
+    <div id="gjs"></div>
+
+    <script>
+        // Basic usage - Monaco Editor loads automatically
+        const editor = grapesjs.init({
+            container: '#gjs',
+            height: '100vh',
+            plugins: ['grapejs-custom-code-monaco-editor'],
+            
+            // Minimal configuration needed
+            pluginsOpts: {
+                'grapejs-custom-code-monaco-editor': {
+                    // Optional: Customize Monaco Editor
+                    monacoOptions: {
+                        theme: 'vs-dark',
+                        language: 'html'
+                    }
+                }
+            }
+        });
+
+        // Optional: Listen for Monaco loading status
+        editor.on('monaco:load-error', (error) => {
+            console.error('Monaco failed to load:', error);
+        });
+    </script>
+</body>
+</html>

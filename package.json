@@ -1,6 +1,6 @@
 {
   "name": "grapejs-custom-code-monaco-editor",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "GrapesJS component for the embed of custom code with Monaco Editor integration",
   "main": "dist/index.js",
   "files": [

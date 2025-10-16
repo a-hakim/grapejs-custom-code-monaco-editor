@@ -2,6 +2,7 @@ import type { BlockProperties, ComponentDefinition, Plugin } from 'grapesjs';
 import loadBlocks from './blocks';
 import loadCommands from './commands';
 import loadComponents from './components';
+import MonacoLoader from './monaco-loader';
 
 export type PluginOptions = {
   /**
@@ -59,6 +60,16 @@ export type PluginOptions = {
    };
 
    /**
+    * Monaco Editor loading options
+    * @example
+    * { version: '0.54.0', baseUrl: 'https://custom-cdn.com/monaco' }
+    */
+   monacoLoaderOptions?: {
+     version?: string;
+     baseUrl?: string;
+   };
+
+   /**
     * Label for the default save button
     * @default 'Save'
     */
@@ -93,10 +104,24 @@ const plugin: Plugin<PluginOptions> = (editor, opts = {}) => {
       fontSize: 14,
       tabSize: 2
     },
+    monacoLoaderOptions: {
+      version: '0.54.0'
+    },
     buttonLabel: 'Save',
     commandCustomCode: {},
     ...opts
   };
+
+  // Initialize Monaco Editor
+  const monacoLoader = MonacoLoader.getInstance();
+  
+  // Start loading Monaco Editor immediately when plugin is loaded
+  monacoLoader.load(options.monacoLoaderOptions).catch(error => {
+    console.error('GrapesJS Custom Code Plugin: Failed to load Monaco Editor:', error);
+    
+    // Notify editor about the error
+    editor.trigger('monaco:load-error', { error });
+  });
 
   // Add components
   loadComponents(editor, options);

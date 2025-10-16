@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Advanced Configuration - GrapesJS Custom Code Monaco Editor</title>
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/grapesjs"></script>
+    <script src="../dist/index.js"></script>
+    <style>
+        body, html { height: 100%; margin: 0; }
+    </style>
+</head>
+<body>
+    <div id="gjs"></div>
+
+    <script>
+        // Advanced configuration with all options
+        const editor = grapesjs.init({
+            container: '#gjs',
+            height: '100vh',
+            plugins: ['grapejs-custom-code-monaco-editor'],
+            
+            pluginsOpts: {
+                'grapejs-custom-code-monaco-editor': {
+                    // Block configuration
+                    blockCustomCode: {
+                        label: 'Code Editor',
+                        category: 'Advanced',
+                        media: `<svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>`
+                    },
+                    
+                    // Component properties
+                    propsCustomCode: {
+                        name: 'Advanced Code Block',
+                        droppable: true
+                    },
+                    
+                    // Toolbar button
+                    toolbarBtnCustomCode: {
+                        label: 'Edit Code',
+                        attributes: { title: 'Open Monaco Editor' }
+                    },
+                    
+                    // Modal configuration
+                    modalTitle: 'Monaco Code Editor',
+                    buttonLabel: 'Save Changes',
+                    
+                    // Monaco Editor options
+                    monacoOptions: {
+                        theme: 'vs-dark',
+                        language: 'html',
+                        fontSize: 16,
+                        minimap: { enabled: true },
+                        lineNumbers: 'on',
+                        wordWrap: 'on',
+                        automaticLayout: true,
+                        scrollBeyondLastLine: false,
+                        tabSize: 4,
+                        insertSpaces: true,
+                        folding: true,
+                        renderLineHighlight: 'all',
+                        selectOnLineNumbers: true,
+                        roundedSelection: false,
+                        readOnly: false,
+                        cursorStyle: 'line',
+                        mouseWheelZoom: true
+                    },
+                    
+                    // Monaco Loader options
+                    monacoLoaderOptions: {
+                        version: '0.54.0'
+                    },
+                    
+                    // Custom placeholder for scripts
+                    placeholderScript: `
+                        <div style="padding: 20px; text-align: center; color: #666; border: 2px dashed #ccc;">
+                            <h3>⚠️ Script Detected</h3>
+                            <p>This block contains JavaScript code that cannot be rendered safely in the visual editor.</p>
+                            <p>Use the code editor to modify the content.</p>
+                        </div>
+                    `,
+                    
+                    // Command customization
+                    commandCustomCode: {
+                        // Custom pre-content
+                        getPreContent() {
+                            return '<div style="padding: 10px; background: #2d2d30; color: #ccc; font-size: 12px;">Monaco Editor - Press F11 for fullscreen</div>';
+                        },
+                        
+                        // Custom post-content
+                        getPostContent() {
+                            return '<div style="padding: 5px; font-size: 11px; color: #666;">Powered by Monaco Editor</div>';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Event listeners
+        editor.on('monaco:load-error', (error) => {
+            alert('Failed to load Monaco Editor. Please check your internet connection.');
+            console.error('Monaco loading error:', error);
+        });
+
+        // Add some initial content
+        editor.setComponents(`
+            <div>
+                <h1>Welcome to Advanced Monaco Editor Integration</h1>
+                <p>This example shows all available configuration options.</p>
+                <p>Add a Code Editor block from the "Advanced" category to test it out!</p>
+            </div>
+        `);
+    </script>
+</body>
+</html>
