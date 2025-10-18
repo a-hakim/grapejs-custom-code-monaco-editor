@@ -1,30 +1,24 @@
 # GrapesJS Custom Code with Monaco Editor
 
-This plugin adds the possibility to embed custom code using the powerful Monaco Editor (the same editor that powers VS Code) with **automatic initialization** - no separate setup required!
+This plugin adds the possibility to embed custom code using the powerful Monaco Editor (the same editor that powers VS Code)
 
 <p align="center"><img src="https://user-images.githubusercontent.com/11614725/43289377-15322c5e-912b-11e8-9a29-cc2dc45af48a.gif" alt="GrapesJS Custom Code" align="center"/></p>
 
-## 🚀 **FULLY INTEGRATED** - One Plugin, Zero Setup!
-
-This plugin is now **completely self-contained**:
-
-- 🎯 **Zero External Dependencies** - Monaco Editor loads automatically from CDN
-- ⚡ **Instant Setup** - Just add the plugin to GrapesJS and you're ready to go
-- 🔧 **No Manual Configuration** - Monaco Editor initializes seamlessly
-- 📦 **Single Package** - Everything you need in one plugin
-
-## 🎉 Monaco Editor Integration Features
-
-- ✨ **Rich Syntax Highlighting** - Support for HTML, CSS, JavaScript, TypeScript, and many more languages
-- 🔍 **IntelliSense** - Intelligent code completion, parameter info, quick info, and member lists
-- 🎨 **Themes** - Multiple built-in themes (VS Dark, VS Light, High Contrast)
-- 📏 **Advanced Editing** - Multi-cursor support, find and replace, code folding, and more
-- 🚀 **Performance** - Optimized for large files and better rendering performance
-- 📱 **Accessibility** - Better screen reader support and keyboard navigation
+## Features
+- **Zero External Dependencies** - Monaco Editor loads automatically from CDN
+- **Instant Setup** - Just add the plugin to GrapesJS and you're ready to go
+- **No Manual Configuration** - Monaco Editor initializes seamlessly
+- **Single Package** - Everything you need in one plugin
+- **Rich Syntax Highlighting** - Support for HTML, CSS, JavaScript, TypeScript, and many more languages
+- **IntelliSense** - Intelligent code completion, parameter info, quick info, and member lists
+- **Themes** - Multiple built-in themes (VS Dark, VS Light, High Contrast)
+- **Advanced Editing** - Multi-cursor support, find and replace, code folding, and more
+- **Performance** - Optimized for large files and better rendering performance
+- **Accessibility** - Better screen reader support and keyboard navigation
 
 > Requires GrapesJS v0.14.25 or higher
 
-## 📋 Quick Start
+## Quick Start
 
 ```javascript
 // That's it! Monaco Editor loads automatically
