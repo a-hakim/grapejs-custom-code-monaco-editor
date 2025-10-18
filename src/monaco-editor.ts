@@ -58,8 +58,9 @@ export class MonacoCodeViewer {
     const container = document.createElement('div');
     container.style.width = '100%';
     container.style.height = '400px';
-    container.style.border = '1px solid #ddd';
+    // container.style.border = '1px solid #ddd';
     container.style.position = 'relative';
+    container.style.marginBottom = '16px';
     
     // Add loading indicator
     const loadingDiv = document.createElement('div');
