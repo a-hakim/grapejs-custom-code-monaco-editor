@@ -25,16 +25,6 @@ grapesjs.init({
 });
 ```
 
-## Summary
-
-- Plugin name: `grapesjs-custom-code-monaco-editor`
-- Components
-  - `custom-code`
-- Blocks
-  - `custom-code`
-- Commands
-  - `custom-code:open-modal`
-
 ## Options
 
 | Option                 | Description                                                                                                                                                                                                                              | Default                                                                                         |
