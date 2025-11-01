@@ -2,13 +2,10 @@
 
 This plugin adds the possibility to embed custom code using the powerful Monaco Editor (the same editor that powers VS Code)
 
-<p align="center"><img src="https://user-images.githubusercontent.com/11614725/43289377-15322c5e-912b-11e8-9a29-cc2dc45af48a.gif" alt="GrapesJS Custom Code" align="center"/></p>
+![GrapesJS Custom Code with Monaco Editor](https://raw.githubusercontent.com/a-hakim/grapesjs-custom-code-monaco-editor/master/preview.png)
 
 ## Features
-- **Zero External Dependencies** - Monaco Editor loads automatically from CDN
-- **Instant Setup** - Just add the plugin to GrapesJS and you're ready to go
-- **No Manual Configuration** - Monaco Editor initializes seamlessly
-- **Single Package** - Everything you need in one plugin
+
 - **Rich Syntax Highlighting** - Support for HTML, CSS, JavaScript, TypeScript, and many more languages
 - **IntelliSense** - Intelligent code completion, parameter info, quick info, and member lists
 - **Themes** - Multiple built-in themes (VS Dark, VS Light, High Contrast)
@@ -23,56 +20,52 @@ This plugin adds the possibility to embed custom code using the powerful Monaco 
 ```javascript
 // That's it! Monaco Editor loads automatically
 grapesjs.init({
-  container: '#gjs',
-  plugins: ['grapesjs-custom-code-monaco-editor']
+  container: "#gjs",
+  plugins: ["grapesjs-custom-code-monaco-editor"],
 });
 ```
 
-
 ## Summary
 
-* Plugin name: `grapesjs-custom-code-monaco-editor`
-* Components
-  * `custom-code`
-* Blocks
-  * `custom-code`
-* Commands
-  * `custom-code:open-modal`
-
-
-
+- Plugin name: `grapesjs-custom-code-monaco-editor`
+- Components
+  - `custom-code`
+- Blocks
+  - `custom-code`
+- Commands
+  - `custom-code:open-modal`
 
 ## Options
 
-|Option|Description|Default|
-|-|-|-
-| `blockCustomCode` | Object to extend the default custom code block, eg. `{ label: 'Custom Code', category: 'Extra', ... }`. Pass a falsy value to avoid adding the block | `{}` |
-| `propsCustomCode` | Object to extend the default custom code properties, eg. `{ name: 'Custom Code', components: '<span>Initial content</span>' ... }` | `{}` |
-| `toolbarBtnCustomCode` | Object to extend the default component's toolbar button for the code, eg. `{ label: '</>', attributes: { title: 'Open custom code' } }`. Pass a falsy value to avoid adding the button | `{}` |
-| `placeholderScript` | Content to show when the custom code contains `<script>` | [Check the source](https://github.com/GrapesJS/components-custom-code/blob/master/src/index.ts) |
-| `modalTitle` | Title for the modal | `Insert your code` |
-| `codeViewOptions` | **Legacy:** Additional options for backward compatibility | `{}` |
-| `monacoOptions` | **New:** Monaco Editor specific options (see below) | `{ theme: 'vs-dark', language: 'html', ... }` |
-| `monacoLoaderOptions` | **New:** Monaco Editor loading configuration | `{ version: '0.54.0' }` |
-| `buttonLabel` | Label for the default save button | `Save` |
-| `commandCustomCode` | Object to extend the default custom code command, eg. `{ getPreContent: () => '<div>Paste here</div>' }` [Check the source](https://github.com/GrapesJS/components-custom-code/blob/master/src/commands.ts) to see all available methods | `{}` |
+| Option                 | Description                                                                                                                                                                                                                              | Default                                                                                         |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `blockCustomCode`      | Object to extend the default custom code block, eg. `{ label: 'Custom Code', category: 'Extra', ... }`. Pass a falsy value to avoid adding the block                                                                                     | `{}`                                                                                            |
+| `propsCustomCode`      | Object to extend the default custom code properties, eg. `{ name: 'Custom Code', components: '<span>Initial content</span>' ... }`                                                                                                       | `{}`                                                                                            |
+| `toolbarBtnCustomCode` | Object to extend the default component's toolbar button for the code, eg. `{ label: '</>', attributes: { title: 'Open custom code' } }`. Pass a falsy value to avoid adding the button                                                   | `{}`                                                                                            |
+| `placeholderScript`    | Content to show when the custom code contains `<script>`                                                                                                                                                                                 | [Check the source](https://github.com/GrapesJS/components-custom-code/blob/master/src/index.ts) |
+| `modalTitle`           | Title for the modal                                                                                                                                                                                                                      | `Insert your code`                                                                              |
+| `codeViewOptions`      | **Legacy:** Additional options for backward compatibility                                                                                                                                                                                | `{}`                                                                                            |
+| `monacoOptions`        | **New:** Monaco Editor specific options (see below)                                                                                                                                                                                      | `{ theme: 'vs-dark', language: 'html', ... }`                                                   |
+| `monacoLoaderOptions`  | **New:** Monaco Editor loading configuration                                                                                                                                                                                             | `{ version: '0.54.0' }`                                                                         |
+| `buttonLabel`          | Label for the default save button                                                                                                                                                                                                        | `Save`                                                                                          |
+| `commandCustomCode`    | Object to extend the default custom code command, eg. `{ getPreContent: () => '<div>Paste here</div>' }` [Check the source](https://github.com/GrapesJS/components-custom-code/blob/master/src/commands.ts) to see all available methods | `{}`                                                                                            |
 
 ### Monaco Editor Options
 
 The `monacoOptions` object accepts all Monaco Editor configuration options:
 
-|Option|Description|Default|
-|-|-|-
-| `theme` | Editor theme: `'vs'`, `'vs-dark'`, `'hc-black'` | `'vs-dark'` |
-| `language` | Language mode: `'html'`, `'css'`, `'javascript'`, `'typescript'`, etc. | `'html'` |
-| `readOnly` | Whether the editor is read-only | `false` |
-| `minimap.enabled` | Show/hide minimap | `false` |
-| `lineNumbers` | Show line numbers: `'on'`, `'off'`, `'relative'`, `'interval'` | `'on'` |
-| `wordWrap` | Word wrap: `'on'`, `'off'`, `'wordWrapColumn'`, `'bounded'` | `'on'` |
-| `fontSize` | Font size in pixels | `14` |
-| `tabSize` | Tab size in spaces | `2` |
-| `automaticLayout` | Automatically resize editor | `true` |
-| `scrollBeyondLastLine` | Allow scrolling beyond last line | `false` |
+| Option                 | Description                                                            | Default     |
+| ---------------------- | ---------------------------------------------------------------------- | ----------- |
+| `theme`                | Editor theme: `'vs'`, `'vs-dark'`, `'hc-black'`                        | `'vs-dark'` |
+| `language`             | Language mode: `'html'`, `'css'`, `'javascript'`, `'typescript'`, etc. | `'html'`    |
+| `readOnly`             | Whether the editor is read-only                                        | `false`     |
+| `minimap.enabled`      | Show/hide minimap                                                      | `false`     |
+| `lineNumbers`          | Show line numbers: `'on'`, `'off'`, `'relative'`, `'interval'`         | `'on'`      |
+| `wordWrap`             | Word wrap: `'on'`, `'off'`, `'wordWrapColumn'`, `'bounded'`            | `'on'`      |
+| `fontSize`             | Font size in pixels                                                    | `14`        |
+| `tabSize`              | Tab size in spaces                                                     | `2`         |
+| `automaticLayout`      | Automatically resize editor                                            | `true`      |
+| `scrollBeyondLastLine` | Allow scrolling beyond last line                                       | `false`     |
 
 For complete Monaco Editor options, see the [Monaco Editor API documentation](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html).
 
@@ -80,12 +73,13 @@ For complete Monaco Editor options, see the [Monaco Editor API documentation](ht
 
 The `monacoLoaderOptions` object controls how Monaco Editor is loaded:
 
-|Option|Description|Default|
-|-|-|-
-| `version` | Monaco Editor version to load from CDN | `'0.54.0'` |
-| `baseUrl` | Custom CDN base URL for Monaco Editor | `https://unpkg.com/monaco-editor@{version}/min/vs` |
+| Option    | Description                            | Default                                            |
+| --------- | -------------------------------------- | -------------------------------------------------- |
+| `version` | Monaco Editor version to load from CDN | `'0.54.0'`                                         |
+| `baseUrl` | Custom CDN base URL for Monaco Editor  | `https://unpkg.com/monaco-editor@{version}/min/vs` |
 
 Example:
+
 ```javascript
 {
   monacoLoaderOptions: {
@@ -95,29 +89,24 @@ Example:
 }
 ```
 
-
-
-
-
 ## Download
 
-* CDN
-  * `https://unpkg.com/grapesjs-custom-code-monaco-editor`
-* NPM
-  * `npm i grapesjs-custom-code-monaco-editor`
-* GIT
-  * `git clone https://github.com/GrapesJS/components-custom-code.git`
-
-
-
-
+- CDN
+  - `https://unpkg.com/grapesjs-custom-code-monaco-editor`
+- NPM
+  - `npm i grapesjs-custom-code-monaco-editor`
+- GIT
+  - `git clone https://github.com/GrapesJS/components-custom-code.git`
 
 ## Usage
 
 ### CDN Usage (with Monaco Editor)
 
 ```html
-<link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
+<link
+  href="https://unpkg.com/grapesjs/dist/css/grapes.min.css"
+  rel="stylesheet"
+/>
 <script src="https://unpkg.com/grapesjs"></script>
 <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
 <script src="path/to/grapesjs-custom-code-monaco-editor.min.js"></script>
@@ -127,7 +116,7 @@ Example:
 <script type="text/javascript">
   // Configure Monaco Editor
   require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.44.0/min/vs' }});
-  
+
   require(['vs/editor/editor.main'], function() {
     var editor = grapesjs.init({
         container : '#gjs',
@@ -205,10 +194,6 @@ GrapesJS.init({
 });
 ```
 
-
-
-
-
 ## Development
 
 Clone the repository
@@ -229,10 +214,6 @@ Start the dev server
 ```sh
 $ npm start
 ```
-
-
-
-
 
 ## License
 
