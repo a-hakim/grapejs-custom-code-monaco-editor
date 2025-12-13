@@ -52,10 +52,8 @@ export class MonacoLoader {
         return;
       }
 
-      // Load the AMD loader script first
-      this.loadScript(`${monacoBaseUrl}/loader.js`)
-        .then(() => {
-          // Configure require.js paths
+      const initMonaco = () => {
+         // Configure require.js paths
           window.require.config({
             paths: { vs: monacoBaseUrl }
           });
@@ -67,8 +65,17 @@ export class MonacoLoader {
           }, (error: any) => {
             reject(new Error(`Failed to load Monaco Editor: ${error}`));
           });
-        })
-        .catch(reject);
+      }
+
+      // Check if AMD loader is already available
+      if (window.require) {
+        initMonaco();
+      } else {
+        // Load the AMD loader script first
+        this.loadScript(`${monacoBaseUrl}/loader.js`)
+          .then(initMonaco)
+          .catch(reject);
+      }
     });
 
     return this.loadPromise;
